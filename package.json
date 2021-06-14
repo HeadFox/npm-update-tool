@@ -4,7 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo 'Ok'",
+    "test": "echo 'Test'",
+    "lint:fix": "echo 'Test'",
+    "build:test": "echo 'Build'",
     "build": "esbuild src/index.ts --bundle --platform=node --target=node14 --external:node-gyp --outfile=dist/out.js"
   },
   "bin": {
@@ -13,14 +15,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^15.12.1",
-    "@typescript-eslint/eslint-plugin": "4.26.0",
-    "@typescript-eslint/parser": "4.26.0",
+    "@types/node": "15.12.2",
+    "@types/signale": "1.4.1",
+    "@typescript-eslint/eslint-plugin": "4.26.1",
+    "@typescript-eslint/parser": "4.26.1",
     "esbuild": "0.12.6",
     "eslint": "7.28.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "prettier": "2.3.1",
+    "signale": "1.4.0",
     "typescript": "4.3.2"
   },
   "dependencies": {
