@@ -13,7 +13,7 @@ const getPackageInfo = ({
   newVersionSplit: Array<string>;
   upgradeType: string;
   actualDep: string;
-  depType: string;
+  depType: 'deps' | 'dev-deps';
 } => {
   const depType = pkg.dependencies[name] ? 'deps' : 'dev-deps';
   const actualDep =

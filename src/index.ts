@@ -79,10 +79,10 @@ const getUpdateList = async ({
       }
       await runTest(name, testOptions);
       testPassed = true;
-      const commitPrint = `${name}: ${oldVersion} -> ${newVersion}`;
-      await exec(
-        `git add . && git commit -m "chore(${depType}): ${commitPrint}"`
-      );
+      await exec('git add .');
+      const commitMessage = `"chore(${depType}): ${name} ${oldVersion} to ${newVersion}"`;
+
+      await exec(`git commit -m ${commitMessage}`);
     } catch (err) {
       signale.error(name, 'Quality tests failed, revert + report');
       await exec('git checkout -- package.json package-lock.json');
