@@ -45,8 +45,12 @@ const updateTool = async (
       options.typescript
     );
   } catch (err) {
-    interactive.error('Installing');
-    signale.error(err);
+    interactive.error('Install & quality tests before start');
+    signale.error(err.stderr);
+    await fs.writeFile(
+        `npm-updater/pre-quality-failed.log`,
+        err.stderr
+      );
   }
 
   const { pkg, depList, upgraded, nbPackages } = await checkDependencies(
