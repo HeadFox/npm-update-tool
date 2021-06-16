@@ -25,7 +25,6 @@ const updateTool = async (
   try {
     if (!existsSync('npm-update-tool')) {
       await fs.mkdir('npm-update-tool');
-      signale.pending('Create npm-update-tool folder');
     }
   } catch {
     signale.error('Failed to create npm-update-tool folder');
