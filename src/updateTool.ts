@@ -46,11 +46,7 @@ const updateTool = async (
     );
   } catch (err) {
     interactive.error('Install & quality tests before start');
-    signale.error(err.stderr);
-    await fs.writeFile(
-        `npm-updater/pre-quality-failed.log`,
-        err.stderr
-      );
+    await fs.writeFile('npm-update-tool/pre-quality-failed.log', err.stderr);
   }
 
   const { pkg, depList, upgraded, nbPackages } = await checkDependencies(
@@ -124,7 +120,7 @@ const updateTool = async (
       errorFile = errorFile.concat(`## Error\n${err.stderr}\n`);
 
       await fs.writeFile(
-        `npm-updater/${name.replace(/[/\\?%*:|"<>]/g, '_')}-failed.log`,
+        `npm-update-tool/${name.replace(/[/\\?%*:|"<>]/g, '_')}-failed.log`,
         errorFile
       );
       testPassed = false;
