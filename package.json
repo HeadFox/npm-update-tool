@@ -1,6 +1,6 @@
 {
   "name": "npm-update-tool",
-  "version": "0.0.1-0",
+  "version": "0.0.2-0",
   "description": "This package is build to help you upgrade your dependencies locally",
   "repository": "https://github.com/HeadFox/npm-update-tool",
   "main": "dist/index.js",
