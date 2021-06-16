@@ -1,5 +1,5 @@
 {
-  "name": "nut",
+  "name": "npm-ut",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
     "publish": "npm run build"
   },
   "bin": {
-    "nut": "./dist/out.js"
+    "npm-ut": "./dist/out.js"
   },
   "author": "Lucien PESLIER <HeadFox>",
   "license": "ISC",
