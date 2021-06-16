@@ -37,7 +37,7 @@ const updateTool = async (
   try {
     signale.info('Install & quality tests before start');
     interactive.await('Installing');
-    await exec('npm ci');
+    // await exec('npm install');
     await qualityTest(
       'pre-quality',
       { test: true, lint: true, build: true },
@@ -45,8 +45,14 @@ const updateTool = async (
       options.typescript
     );
   } catch (err) {
-    interactive.error('Install & quality tests before start');
-    await fs.writeFile('npm-update-tool/pre-quality-failed.log', err.stderr);
+    signale.error('Install & quality tests before start');
+    await exec('git checkout -- package.json package-lock.json');
+    let errorFile = `# Pre-quality test\n`;
+    errorFile = errorFile.concat(`## Output \n${err.stdout}\n`);
+    errorFile = errorFile.concat(`## Error\n${err.stderr}\n`);
+
+    await fs.writeFile(`npm-update-tool/pre-quality-failed.log`, errorFile);
+    throw new Error('pre-quality failed, interrupt the script');
   }
 
   const { pkg, depList, upgraded, nbPackages } = await checkDependencies(
