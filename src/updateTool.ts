@@ -37,7 +37,7 @@ const updateTool = async (
   try {
     signale.info('Install & quality tests before start');
     interactive.await('Installing');
-    // await exec('npm install');
+    await exec('npm install');
     await qualityTest(
       'pre-quality',
       { test: true, lint: true, build: true },
