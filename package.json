@@ -1,5 +1,5 @@
 {
-  "name": "npm-ut",
+  "name": "npmut",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
     "publish": "npm run build"
   },
   "bin": {
-    "npm-ut": "./dist/out.js"
+    "npmut": "./dist/out.js"
   },
   "author": "Lucien PESLIER <HeadFox>",
   "license": "ISC",
