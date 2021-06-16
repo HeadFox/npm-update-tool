@@ -46,7 +46,7 @@ const updateTool = async (
     );
   } catch (err) {
     signale.error('Install & quality tests before start');
-    await exec('git checkout -- package.json package-lock.json');
+    await exec('git checkout -- .');
     let errorFile = `# Pre-quality test\n`;
     errorFile = errorFile.concat(`## Output \n${err.stdout}\n`);
     errorFile = errorFile.concat(`## Error\n${err.stderr}\n`);
