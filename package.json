@@ -1,18 +1,16 @@
 {
-  "name": "npmupdater",
-  "version": "1.0.0",
+  "name": "nut",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo 'Test'",
-    "lint:fix": "echo 'Test'",
-    "build:test": "echo 'Build'",
-    "build": "esbuild src/index.ts --bundle --platform=node --target=node14 --external:node-gyp --outfile=dist/out.js"
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node14 --external:node-gyp --outfile=dist/out.js",
+    "publish": "npm run build"
   },
   "bin": {
-    "npmupdater": "./dist/out.js"
+    "nut": "./dist/out.js"
   },
-  "author": "",
+  "author": "Lucien PESLIER <HeadFox>",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "15.12.2",

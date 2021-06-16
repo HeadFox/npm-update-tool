@@ -1,6 +1,7 @@
 import { Signale } from 'signale';
 import util from 'util';
 import child_process from 'child_process';
+import { Options } from './constants/defaultOptions';
 const exec = util.promisify(child_process.exec);
 
 interface RunTest {
@@ -11,9 +12,11 @@ interface RunTest {
     build: boolean;
   };
 }
-export const runTest = async (
+const qualityTest = async (
   name: RunTest['name'],
-  { lint, test, build }: RunTest['options']
+  { lint, test, build }: RunTest['options'],
+  commands: Options['commands'],
+  typescript: Options['typescript']
 ): Promise<void> => {
   const interactive = new Signale({
     interactive: true,
@@ -22,7 +25,7 @@ export const runTest = async (
   if (lint) {
     try {
       interactive.await('Linting');
-      await exec('npm run lint:fix');
+      await exec(commands.lint);
     } catch (err) {
       interactive.error('Linting');
       throw err;
@@ -31,7 +34,7 @@ export const runTest = async (
   if (test) {
     try {
       interactive.await('Testing');
-      await exec('npm run test');
+      await exec(commands.test);
     } catch (err) {
       interactive.error('Testing');
       throw err;
@@ -40,11 +43,22 @@ export const runTest = async (
   if (build) {
     try {
       interactive.await('Building');
-      await exec('npm run build');
+      await exec(commands.build);
     } catch (err) {
       interactive.error('Building');
       throw err;
     }
   }
-  interactive.success('Quality test passed !');
+  if (typescript) {
+    try {
+      interactive.await('Check typing');
+      await exec(commands.build);
+    } catch (err) {
+      interactive.error('Check typing');
+      throw err;
+    }
+  }
+  interactive.success('Quality tests passed !');
 };
+
+export default qualityTest;

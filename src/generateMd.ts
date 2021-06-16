@@ -13,7 +13,7 @@ const generateMd = async (groupList: GroupList): Promise<void> => {
     });
     file = file.concat('\n');
   });
-  await fs.writeFile('npm-updater/update.md', file);
+  await fs.writeFile('npm-update-tool/update.md', file);
 };
 
 export default generateMd;
