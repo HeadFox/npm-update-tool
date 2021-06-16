@@ -1,7 +1,8 @@
 {
-  "name": "npmut",
-  "version": "0.0.1",
-  "description": "",
+  "name": "npm-update-tool",
+  "version": "0.0.1-0",
+  "description": "This package is build to help you upgrade your dependencies locally",
+  "repository": "https://github.com/HeadFox/npm-update-tool",
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --target=node14 --external:node-gyp --outfile=dist/out.js",
