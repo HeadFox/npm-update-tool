@@ -52,7 +52,7 @@ const qualityTest = async (
   if (typescript) {
     try {
       interactive.await('Check typing');
-      await exec('tsc');
+      await exec('tsc --noEmit');
     } catch (err) {
       interactive.error('Check typing');
       throw err;
