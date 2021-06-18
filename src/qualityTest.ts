@@ -16,12 +16,9 @@ const qualityTest = async (
   name: RunTest['name'],
   { lint, test, build }: RunTest['options'],
   commands: Options['commands'],
-  typescript: Options['typescript']
+  typescript: Options['typescript'],
+  interactive: Signale
 ): Promise<void> => {
-  const interactive = new Signale({
-    interactive: true,
-    scope: name
-  });
   if (lint) {
     try {
       interactive.await('Linting');

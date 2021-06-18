@@ -30,19 +30,20 @@ const updateTool = async (
     signale.error('Failed to create npm-update-tool folder');
   }
 
-  const interactive = new Signale({
+  const preQualitySignale = new Signale({
     interactive: true,
     scope: 'pre-quality'
   });
   try {
     signale.info('Install & quality tests before start');
-    interactive.await('Installing');
+    preQualitySignale.await('Installing');
     await exec('npm ci');
     await qualityTest(
       'pre-quality',
       { test: true, lint: true, build: true },
       options.commands,
-      options.typescript
+      options.typescript,
+      preQualitySignale
     );
   } catch (err) {
     signale.error('Install & quality tests before start');
@@ -79,7 +80,9 @@ const updateTool = async (
       build: false
     };
     try {
-      signale.info(name, `Install package [${i + 1}/${nbPackages}]`);
+      signale.info(name, ` [${i + 1}/${nbPackages}]`);
+      const singleInteractive = new Signale({ interactive: true, scope: name });
+      singleInteractive.await('Installing');
       await exec(`npm i ${name}@${newVersion}`);
       if (
         options.filters.lint.find((filterName) => name.includes(filterName))
@@ -106,7 +109,8 @@ const updateTool = async (
         name,
         testOptions,
         options.commands,
-        options.typescript
+        options.typescript,
+        singleInteractive
       );
       testPassed = true;
       await exec('git add .');
