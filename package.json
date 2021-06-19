@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --target=node14 --external:node-gyp --outfile=dist/out.js",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "semantic-release": "semantic-release"
   },
   "bin": {
