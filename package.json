@@ -1,12 +1,13 @@
 {
   "name": "npm-update-tool",
-  "version": "0.0.2-18",
+  "version": "0.0.2",
   "description": "This package is build to help you upgrade your dependencies locally",
   "repository": "https://github.com/HeadFox/npm-update-tool",
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --target=node14 --external:node-gyp --outfile=dist/out.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "release": "standard-version"
   },
   "bin": {
     "npmut": "./dist/out.js"
@@ -24,6 +25,7 @@
     "eslint-plugin-prettier": "3.4.0",
     "prettier": "2.3.1",
     "signale": "1.4.0",
+    "standard-version": "^9.3.0",
     "typescript": "4.3.2"
   },
   "dependencies": {
