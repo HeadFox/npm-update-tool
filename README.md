@@ -54,7 +54,7 @@ These filters will be used to run the specify command if your dependency name co
 
 Categories option is used to group updates in the generated `update.md` file.
 ```typescript
-categories: Array<string>; // Default: ['babel', 'eslint','testing-library', '@types', '@ma-js-common'];
+categories: Array<string>; // Default: ['babel', 'eslint','testing-library', '@types'];
 ```
 
 
