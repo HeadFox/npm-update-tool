@@ -1,6 +1,6 @@
 # WIP (Not production ready)
 
-The documentation will be updated and tests added
+The documentation will be updated and tests added.
 
 # npm-update-tool (npmut)
 
