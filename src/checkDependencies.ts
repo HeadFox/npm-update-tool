@@ -14,7 +14,7 @@ const checkDependencies = async (
 }> => {
   const upgraded = await ncu.run({
     peer: true,
-    reject: excludes
+    reject: excludes?.join(',')
   });
   const nbPackages = Object.keys(upgraded).length;
   signale.info(nbPackages, 'outdated packages');
