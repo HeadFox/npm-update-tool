@@ -57,7 +57,8 @@ const updateTool = async (
   }
 
   const { pkg, depList, upgraded, nbPackages } = await checkDependencies(
-    actualPath
+    actualPath,
+    options.excludes
   );
 
   const groupList: GroupList = {};
@@ -89,8 +90,8 @@ const updateTool = async (
       ) {
         testOptions.lint = true;
       } else if (
-        options.excludes &&
-        options.excludes.find((item) => name.includes(item))
+        options.excludesQuality &&
+        options.excludesQuality.find((item) => name.includes(item))
       ) {
         signale.info(
           name,

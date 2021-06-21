@@ -13,6 +13,7 @@ export interface Options {
   };
   categories: Array<string>;
   excludes?: Array<string>;
+  excludesQuality?: Array<string>;
 }
 
 const defaultOptions = {
@@ -27,7 +28,8 @@ const defaultOptions = {
     build: buildFilter
   },
   categories,
-  excludes: undefined
+  excludes: undefined,
+  excludesQuality: undefined
 };
 
 export default defaultOptions;
