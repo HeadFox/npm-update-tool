@@ -6,7 +6,15 @@ const readConfig = async (filePath: string): Promise<Options> => {
     const { default: options } = await import(path.resolve(filePath));
     return {
       ...defaultOptions,
-      ...options
+      ...options,
+      commands: {
+        ...defaultOptions.commands,
+        ...options.commands
+      },
+      filters: {
+        ...defaultOptions.filters,
+        ...options.filters
+      }
     };
   } catch {
     return defaultOptions;
