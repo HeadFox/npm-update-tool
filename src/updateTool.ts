@@ -115,7 +115,7 @@ const updateTool = async (
       );
       testPassed = true;
       await exec('git add .');
-      const commitMessage = `"chore(${depType}): ${name} ${oldVersion} to ${newVersion}"`;
+      const commitMessage = `"chore(${depType}): bump ${name} ${oldVersion} to ${newVersion}"`;
 
       await exec(`git commit -m ${commitMessage}`);
     } catch (err) {

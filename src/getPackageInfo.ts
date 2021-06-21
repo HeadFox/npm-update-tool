@@ -1,3 +1,5 @@
+import DepType from './enums/DepType';
+
 const getPackageInfo = ({
   pkg,
   name,
@@ -13,11 +15,13 @@ const getPackageInfo = ({
   newVersionSplit: Array<string>;
   upgradeType: string;
   actualDep: string;
-  depType: 'deps' | 'dev-deps';
+  depType: DepType;
 } => {
-  const depType = pkg.dependencies[name] ? 'deps' : 'dev-deps';
+  const depType = pkg.dependencies[name] ? DepType.DEPS : DepType.DEPS_DEV;
   const actualDep =
-    depType == 'deps' ? pkg.dependencies[name] : pkg.devDependencies[name];
+    depType == DepType.DEPS
+      ? pkg.dependencies[name]
+      : pkg.devDependencies[name];
   const oldVersion = actualDep.replace('^', '');
   const newVersion = upgraded[name].replace('^', '');
 
