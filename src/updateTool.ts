@@ -61,6 +61,29 @@ const updateTool = async (
     options.excludes
   );
 
+  const installList = Object.keys(upgraded).map(
+    (key) => `${key}@${upgraded[key]}`
+  );
+
+  let allPassed: boolean;
+
+  try {
+    signale.info('Install all new deps');
+    await exec(`npm install ${installList.join(' ')} --no-save`);
+    await qualityTest(
+      'all-quality',
+      { test: true, lint: true, build: true },
+      options.commands,
+      options.typescript,
+      preQualitySignale
+    );
+    signale.success(
+      'All quality test are passing, bump deps without testing each one'
+    );
+    allPassed = true;
+  } catch {
+    allPassed = false;
+  }
   const groupList: GroupList = {};
 
   const newList = [];
@@ -90,14 +113,6 @@ const updateTool = async (
       ) {
         testOptions.lint = true;
       } else if (
-        options.excludesQuality &&
-        options.excludesQuality.find((item) => name.includes(item))
-      ) {
-        signale.info(
-          name,
-          'No quality test because this package is in ignoreList'
-        );
-      } else if (
         options.filters.build.find((filterName) => name.includes(filterName))
       ) {
         testOptions.build = true;
@@ -106,13 +121,28 @@ const updateTool = async (
         testOptions.lint = true;
         testOptions.test = true;
       }
-      await qualityTest(
-        name,
-        testOptions,
-        options.commands,
-        options.typescript,
-        singleInteractive
-      );
+      if (allPassed) {
+        signale.info(
+          name,
+          'No quality test because the full install was successful'
+        );
+      } else if (
+        options.excludesQuality &&
+        options.excludesQuality.find((item) => name.includes(item))
+      ) {
+        signale.info(
+          name,
+          'No quality test because this package is in ignoreList'
+        );
+      } else {
+        await qualityTest(
+          name,
+          testOptions,
+          options.commands,
+          options.typescript,
+          singleInteractive
+        );
+      }
       testPassed = true;
       await exec('git add .');
       const commitMessage = `"chore(${depType}): bump ${name} ${oldVersion} to ${newVersion}"`;
